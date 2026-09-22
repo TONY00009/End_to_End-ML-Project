@@ -33,3 +33,22 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          # Log the EC2 server into AWS ECR
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | sudo docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
+          
+          # Pull the new image
+          sudo docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/student-ml-app:latest
+          
+          # Forcefully stop and remove the old container (ignore error if none exists)
+          sudo docker rm -f $(sudo docker ps -aq) || true
+          
+          # Run the new container
+          sudo docker run -d -p 8000:8000 ${{ secrets.AWS_ECR_LOGIN_URI }}/student-ml-app:latest
