@@ -6,4 +6,11 @@ scikit-learn
 catboost
 xgboost
 dill
+flask
+
+# Using Fast API
+fastapi
+uvicorn
+python-multipart
+jinja2
 # -e .

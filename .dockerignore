@@ -1,0 +1,6 @@
+project_venv/
+__pycache__/
+.git/
+notebook/
+logs/
+*.pyc
