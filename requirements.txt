@@ -12,5 +12,5 @@ flask
 fastapi
 uvicorn
 python-multipart
-jinja2
+jinja2 
 # -e .
