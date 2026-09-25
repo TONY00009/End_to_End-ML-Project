@@ -81,9 +81,9 @@ class ModelTrainer:
             model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, param=params)
 
             # =======================================================
-            # LOCAL MLFLOW TRACKING (LOGGING ALL MODELS)
+            # Global MLFLOW TRACKING (LOGGING ALL MODELS)
             # =======================================================
-            mlflow.set_tracking_uri("http://18.206.235.200:5000")
+            mlflow.set_tracking_uri("http://34.228.21.118:5000")
             mlflow.set_experiment("End_to_End_ML_Project")
 
             for model_name, model_score in model_report.items():
