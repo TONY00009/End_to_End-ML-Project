@@ -22,3 +22,5 @@ Beyond standard local model training, this project implements a cloud-native **M
                           |-- SSH into Cloud Server ------------> [ AWS EC2 Instance ]
                                                                      |-- Port 5000: MLflow Tracking UI
                                                                      |-- Port 8000: FastAPI Prediction App
+
+```
